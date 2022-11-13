@@ -11,7 +11,7 @@ List<Asset> assets = new List<Asset>()
                 new Asset("Computer", "Lenovo", "Yoga 730", "USA", Convert.ToDateTime("2019-09-28"), 835),
                 new Asset("Computer", "Lenovo", "Yoga 530", "USA", Convert.ToDateTime("2019-11-21"), 1030),
                 new Asset("Phone", "OnePlus", "8 Pro", "Sweden", Convert.ToDateTime("2020-05-11"), 999),
-                new Asset("Phone", "Xiamio", "8TZ Pro", "USAn", Convert.ToDateTime("2020-04-19"), 989),
+                new Asset("Phone", "Xiamio", "8TZ Pro", "USA", Convert.ToDateTime("2020-04-19"), 989),
                 new Asset("Computer", "Asus", "Magni", "Sweden", Convert.ToDateTime("2020-06-22"), 1999)
             };
 
@@ -48,17 +48,36 @@ do
             type = input;
         }
 
-        Console.Write("Write the brand name: ");
-        brand = Console.ReadLine();
+        do
+        {
+            Console.Write("Write the brand name: ");
+            brand = Console.ReadLine();
+            Console.WriteLine();
+        } while (!checkIfValidInput(brand));
 
-        Console.Write("Write the model name: ");
-        model = Console.ReadLine();
+        do
+        {
+            Console.Write("Write the model name: ");
+            model = Console.ReadLine();
+            Console.WriteLine();
+        } while (!checkIfValidInput(model));
 
-        Console.Write("Write where the office is located(Sweden/Spain/USA): ");
-        office = Console.ReadLine();
+        do
+        {
+            Console.Write("Write where the office is located(Sweden/Spain/USA): ");
+            office = Console.ReadLine();
+            Console.WriteLine();
+            if (office.ToLower().Equals("sweden") || office.ToLower().Equals("usa") || office.ToLower().Equals("spain")) { break; }
+        } while (true);
 
-        Console.Write("Write the cost of the asset in USD: ");
-        priceInUSD = Int32.Parse(Console.ReadLine());
+        do
+        {
+            Console.Write("Write the cost of the asset in USD: ");
+            priceInUSD = Int32.Parse(Console.ReadLine());
+            Console.WriteLine();
+            if (priceInUSD > 0) { break; }
+        } while (true);
+
 
         do
         {
@@ -143,6 +162,12 @@ do
     }
 } while (true);
 
+bool checkIfValidInput(string input)
+{
+    if (input == null) { return false; }
+    else if (input.Length <= 2) { return false; }
+    else { return true; }
+}
 
 double calculateLocalPrice(string input, int value)
 {
@@ -196,5 +221,4 @@ class Asset
         PurchaseDate = purchaseDate;
         PriceInUSD = priceInUSD;
     }
-
 }
